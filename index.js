@@ -8,6 +8,7 @@ const bodyParser = require("body-parser");
 const { Transacoes, User } = require("./db/models");
 
 const jwt = require("jsonwebtoken");
+const { type } = require("express/lib/response");
 
 app.use(bodyParser.json());
 
@@ -92,13 +93,22 @@ app.get("/transacoes", authenticate, (req, res) => {
 app.post("/transacoes", authenticate, (req, res) => {
   let valor = req.body.valor;
   let tipo = req.body.tipo;
+  let identificacao = req.body.identificacao;
   let descricao = req.body.descricao;
-  let dataInclusao = req.body.dataInclusao;
+  let dataInclusao = new Date();
+  let data = req.body.data;
+  console.log(data);
+  if (data === undefined || data === null || data === "") {
+    data = new Date();
+  }
+  console.log(data);
 
   let newTransacao = new Transacoes({
     valor,
     tipo,
+    identificacao,
     descricao,
+    data,
     dataInclusao,
     _userId: req.user_id,
   });

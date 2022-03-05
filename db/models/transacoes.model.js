@@ -11,12 +11,17 @@ const TransacoesSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  identificacao: {
+    type: String,
+  },
   descricao: {
+    type: String,
+  },
+  data: {
     type: String,
   },
   dataInclusao: {
     type: String,
-    required: true,
   },
   _userId: {
     type: mongoose.Types.ObjectId,
