@@ -95,13 +95,8 @@ app.post("/transacoes", authenticate, (req, res) => {
   let tipo = req.body.tipo;
   let identificacao = req.body.identificacao;
   let descricao = req.body.descricao;
-  let dataInclusao = new Date();
+  let dataInclusao = req.body.dataInclusao;
   let data = req.body.data;
-  console.log(data);
-  if (data === undefined || data === null || data === "") {
-    data = new Date();
-  }
-  console.log(data);
 
   let newTransacao = new Transacoes({
     valor,
